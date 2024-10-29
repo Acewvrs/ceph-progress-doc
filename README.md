@@ -89,9 +89,11 @@ git pull <Jun's fork> <branch name> --rebase (this will incorporate your project
 ### 10/29
 Document everything & progress we made
 
-At this point, we're ready to raise a pull request! 
+At this point, we're ready to commit our work! 
 
-Read the PR guideline for Ceph, which is [here](https://github.com/ceph/ceph/blob/main/SubmittingPatches.rst)
+Read the PR guideline for Ceph, which is [here](https://github.com/ceph/ceph/blob/main/SubmittingPatches.rst). <br />
+I ensured our commit titles and the content of PR were adhering to the guidelines. <br />
+After everything looked good, I raised a [pull request](https://github.com/ceph/ceph/pull/60548)
 
 
 
