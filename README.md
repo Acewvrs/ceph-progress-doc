@@ -5,12 +5,12 @@
 Created milestones for our project and worked on troubleshooting regarding setting up dev enviornments (VPN, Virtual Machines, etc)
 
 Project 3 Milestones
-Week 1: Set up dev environment (Read up on background information and code)
-Week 2: Get familiar with commands & running test clusters
-Week 3-4: Brainstorming a solution in C++
-Week 5-6: First draft of the implementation
-Week 7-8: Refine implementation
-Week 9-10: Raise a PR & Review & Poster
+* Week 1: Set up dev environment (Read up on background information and code)
+* Week 2: Get familiar with commands & running test clusters
+* Week 3-4: Brainstorming a solution in C++
+* Week 5-6: First draft of the implementation
+* Week 7-8: Refine implementation
+* Week 9-10: Raise a PR & Review & Poster
 
 Asked questions, started brainstorming/studying code
 
@@ -18,21 +18,22 @@ Asked questions, started brainstorming/studying code
 
 More troubleshooting!
 Steps to pair programming using remote branch:
-  I was appointed to be the "branch leader", i.e. create a branch and push to their forked repo
-  Next, make sure that all group members are added as "collaborators" to that person's ceph fork
-  Next, run these commands to add that person's fork and fetch their branch:
-  git remote add <name of person's fork> <url to their fork> (git remote add ljflores git@github.com:ljflores/ceph.git)
-  git fetch <name of person's fork> (git fetch ljflores)
-  git checkout --track <name of person's fork>/<name of branch> (git checkout --track ljflores/wip-new-project-branch)
-  Now, you're set to commit. Before you push your changes, make sure your branch is up to date with the latest commits:
-  git pull <name of person's fork> <name of person's branch> --rebase (git pull ljflores wip-new-project-branch --rebase)
-  Now you can push (git push <name of person's fork> <name of person's branch> --> git push ljflores wip-new-project-branch
+1. I was appointed to be the "branch leader", i.e. create a branch and push to their forked repo
+2. Next, make sure that all group members are added as "collaborators" to that person's ceph fork
+3. Next, run these commands to add that person's fork and fetch their branch:
+4. git remote add <name of person's fork> <url to their fork> (git remote add ljflores git@github.com:ljflores/ceph.git)
+5. git fetch <name of person's fork> (git fetch ljflores)
+6. git checkout --track <name of person's fork>/<name of branch> (git checkout --track ljflores/wip-new-project-branch)
+7. Now, you're set to commit. Before you push your changes, make sure your branch is up to date with the latest commits:
+8. git pull <name of person's fork> <name of person's branch> --rebase (git pull ljflores wip-new-project-branch --rebase)
+9. Now you can push (git push <name of person's fork> <name of person's branch> --> git push ljflores wip-new-project-branch
 
 ### 10/11 - 10/18
-**Most of these notes were taken during this time, but I did add more later.**
+**Most of these notes were taken during this period, but I did add more later.**
 
-Project 3 Notes: https://pad.ceph.com/p/project-3-notes
+Project 3 Notes
 
+## Testing
 To test your code after making changes:
 1. If you're running a test cluster (executed ../src/vstart.sh), terminate it 
 2. Run ninja again
@@ -58,8 +59,7 @@ To test your code after making changes:
 * Store always_on_modules to optimize printing detailed info for enabled modules
 
 ## Useful Notes:
-* p.dump is defined here:
-* https://github.com/Acewvrs/ceph/blob/7e3f09e6651db50de5d5eb43c76071534d0617b9/src/mon/MgrMap.h#L555C3-L555C38
+* p.dump is defined [here](https://github.com/Acewvrs/ceph/blob/7e3f09e6651db50de5d5eb43c76071534d0617b9/src/mon/MgrMap.h#L555C3-L555C38)
 * Difference between p.dump(f.get()) and f->dump_string("module", p)
 * Unit test: src/test/mgr
 
@@ -68,13 +68,12 @@ To test your code after making changes:
 * Should we make a separate dump() for the always - on 
 * How is f (pointer) defined? What is a scoped pointer in the boost library?
 
-### 10/19 - 10/23
-Worked on code
-Merging multiple commits made by teammates (and me)
+### 10/22 - 10/26
+* Worked on code
+* Merging multiple commits made by teammates (and me)
 
-git fetch <Jun's fork>
-git pull <Jun's fork> <branch name> --rebase (this will incorporate your project mates' changes without
-                                              overwriting your commits)
+git fetch <Jun's fork> <br />
+git pull <Jun's fork> <branch name> --rebase (this will incorporate your project mates' changes without overwriting your commits)
 
 **Optimization Idea:**
 * Use hashmap instead of std::map
@@ -87,3 +86,12 @@ git pull <Jun's fork> <branch name> --rebase (this will incorporate your project
 [here]( https://github.com/Acewvrs/ceph/blob/632cb041e7234573bec769a2b0b092ad62380a55/src/mon/MgrMonitor.cc#L1025).
 * You can see that when printing the "always enabled" modules, we're traversing the keys stored in a map (map.get_always_on_modules()), and not the unordered_map (module_info_map) we created. So the order these modules are printed is based on how they are stored in map.get_always_on_modules(). And because it's a map, the keys are sorted alphabetically. 
  
+### 10/29
+Document everything & progress we made
+
+At this point, we're ready to raise a pull request! 
+
+Read the PR guideline for Ceph, which is [here](https://github.com/ceph/ceph/blob/main/SubmittingPatches.rst)
+
+
+
