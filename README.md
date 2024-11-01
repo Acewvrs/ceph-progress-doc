@@ -96,19 +96,23 @@ I ensured our commit titles and the content of PR were adhering to the guideline
 After everything looked good, I raised a [pull request](https://github.com/ceph/ceph/pull/60548)
 
 ### 11/01
-
-Many errors in our PR...
+Currently, our PR fails checks...
 Most of those come from the merge Conflict
 
 Went over how to  resolve git conflicts:
-    - This can happen when you raise a pull request and the github bot adds the "needs-rebase" label
-    - How do I resolve this?
-      - Check out your branch
-      - Make sure it's up to date with the pull request
-      - git pull <origin repository> <branch you are trying to merge to> --rebase
-      - git pull Acewvrs main --rebase (example)
- - run 'git status' to check which file(s) have conflicts (these will be red)
- - open the file and search for "HEAD"
- - incorporate your changes in with the conflicted changes
- - commit your changes
- - Add a conflicts section (only do this for backports; fine to leave out on the main branch)
+- This can happen when you raise a pull request and the github bot adds the "needs-rebase" label
+- How do I resolve this?
+- Check out your branch
+- Make sure it's up to date with the pull request
+- run 'git status' to check which file(s) have conflicts (these will be red)
+- open the file and search for "HEAD"
+- incorporate your changes in with the conflicted changes
+- commit your changes
+- Add a conflicts section (only do this for backports; fine to leave out on the main branch)
+
+Problem: encoutering the following error when git pull
+error: insufficient permission for adding an object to repository database .git/objects
+solution: run it with sudo
+
+When pushing:
+We need to use -f when pushing because we rebased
