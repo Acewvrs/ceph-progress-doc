@@ -165,6 +165,10 @@ if (mon.osdmon()->osdmap.get_num_osds() > 0 &&
     return level;
   }
 ```
+* It seems like we can directly access everything we need from the osdmap.
+* Next question: how do I print it?
+* osdmap provides dump(ceph::Formatter *f) function that handles printing. In our case, f is already provided.
+
 
 ## Useful Notes
 * osdmap is defined [here](https://github.com/Acewvrs/ceph/blob/jun-debug/src/osd/OSDMap.h)
@@ -173,10 +177,9 @@ if (mon.osdmon()->osdmap.get_num_osds() > 0 &&
     - stretch_bucket_count(0),
     - degraded_stretch_mode(0),
     - recovering_stretch_mode(0),
-    - stretch_mode_bucket(0) {
+    - stretch_mode_bucket(0)
 
-
-
+### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
 <details>  
 {
