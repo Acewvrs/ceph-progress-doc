@@ -142,20 +142,42 @@ We need to use -f when pushing because we rebased
 ### 11/05
 Started working on another issue: https://tracker.ceph.com/issues/67812
 
+Task: Implement a separate Ceph command that gathers new stretch cluster data, which the following info.
+"stretch_mode": {
+    "stretch_mode_enabled": false,
+    "stretch_bucket_count": 0,
+    "degraded_stretch_mode": 0,
+    "recovering_stretch_mode": 0,
+    "stretch_mode_bucket": 0
+}
+
 ## Brainstorming:
 * Study the code we worked on. Except the command 'ceph mgr module stretch" to get the stretch cluster data
-* 
+* This block of code gives us some insight into how we can use osdmap.
+```
+if (mon.osdmon()->osdmap.get_num_osds() > 0 &&
+       now > mon.monmap->created + g_conf().get_val<int64_t>("mon_mgr_mkfs_grace")) {
+    health_status_t level = HEALTH_WARN;
+    if (first_seen_inactive != utime_t() &&
+	now - first_seen_inactive > g_conf().get_val<int64_t>("mon_mgr_inactive_grace")) {
+      level = HEALTH_ERR;
+    }
+    return level;
+  }
+```
+
+## Useful Notes
+* osdmap is defined [here](https://github.com/Acewvrs/ceph/blob/jun-debug/src/osd/OSDMap.h)
+* The following variables are public:
+    - stretch_mode_enabled(false),
+    - stretch_bucket_count(0),
+    - degraded_stretch_mode(0),
+    - recovering_stretch_mode(0),
+    - stretch_mode_bucket(0) {
 
 
 
-
-
-
-
-
-
-
-Full output of the command 'ceph mgr module ls ls -f json-pretty' is here.
+Full output of the command 'ceph mgr module ls ls -f json-pretty':
 <details>  
 {
     "always_on_modules": [
