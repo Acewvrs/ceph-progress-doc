@@ -139,7 +139,7 @@ solution: run it with sudo
 When pushing:
 We need to use -f when pushing because we rebased
 
-### 11/05
+### 11/03
 Started working on another issue: https://tracker.ceph.com/issues/67812
 
 Task: Implement a separate Ceph command that gathers new stretch cluster data, which the following info.
@@ -178,6 +178,22 @@ if (mon.osdmon()->osdmap.get_num_osds() > 0 &&
     - degraded_stretch_mode(0),
     - recovering_stretch_mode(0),
     - stretch_mode_bucket(0)
+
+### 11/05 
+Resolved: merge conflict and "sign-off" error.
+
+Problem: our PR has an API issue and fails [one of the tests](https://github.com/Acewvrs/ceph/blob/5acf3d01c18f7bc43792ead1c5000e3e2d671a1f/qa/tasks/mgr/mgr_test_case.py#L111)
+TypeError: unhashable type: 'dict'
+
+The variable loaded is a list of dictionaries rather than a list of strings or other hashable types (as can be seen from the output below). When you attempt to create a set from loaded, Python throws an error because it cannot hash dictionaries.
+
+Intuiton: this is because we switched to using the dump() function from the dump_string() function:
+it->second->dump(f.get())
+f->dump_string("module", p);
+
+The dump_string seems to be the more proper way to print out, given that it takes the "module" option. 
+
+
 
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
