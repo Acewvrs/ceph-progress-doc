@@ -193,7 +193,22 @@ f->dump_string("module", p);
 
 The dump_string seems to be the more proper way to print out, given that it takes the "module" option. 
 
+THE ABOVE SOLUTION IS WRONG because... 
 
+Previously, the enabled_module list only displayed the names of the modules like this: 
+
+"enabled_modules": ["iostat", "nfs"] 
+
+Each item in the list was a string, which is a hashable type and what the set() function is expecting. However, because we wanted our enabled modules to print some other details, it now shows up like this:
+
+"enabled_modules": [  { "name": "iostat", "can_run": true }, {...}, {...} ], where each item is now a dictionary, which is not hashable. I believe the only way around this is to edit the test file (mgr_test_case.py) directly so that it correctly parses the new output format, like so:
+
+module_names = {module['name'] for module in loaded}
+unload_modules = module_names - {"cephadm", "restful"}
+
+This would still be an O(n) operation to add the name of each enabled module to create a set of size n, and the overall time complexity would remain the same.
+
+For reference to the error [click here](https://github.com/Acewvrs/ceph/blob/5acf3d01c18f7bc43792ead1c5000e3e2d671a1f/qa/tasks/mgr/mgr_test_case.py#L111)
 
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
