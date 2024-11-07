@@ -210,6 +210,18 @@ This would still be an O(n) operation to add the name of each enabled module to 
 
 For reference to the error [click here](https://github.com/Acewvrs/ceph/blob/5acf3d01c18f7bc43792ead1c5000e3e2d671a1f/qa/tasks/mgr/mgr_test_case.py#L111)
 
+### 11/07
+The above issue has been fixed!
+
+However, we've got another issue: the API test is timing out at [this line](https://github.com/Acewvrs/ceph/blob/5acf3d01c18f7bc43792ead1c5000e3e2d671a1f/qa/tasks/mgr/mgr_test_case.py#L196)
+
+Intuition: This problem is a continuation of the above (11/5) issue.
+It seems like there's multiple cases of getting the enabled modules' names, all of which are handling the returned set wrong as now it is returning a set of dictionary instead of strings.
+So once I correctly handle the new returned type using my solution above.
+
+
+
+
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
 <details>  
