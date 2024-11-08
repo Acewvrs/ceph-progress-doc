@@ -1,4 +1,7 @@
 # ceph-progress-doc
+This is the document I'm keeping to record the progress I made on Ceph.
+
+IBM coordinator: Laura Flores
 
 ### 9/20 - 9/24
 
@@ -219,7 +222,10 @@ Intuition: This problem is a continuation of the above (11/5) issue.
 It seems like there's multiple cases of getting the enabled modules' names, all of which are handling the returned set wrong as now it is returning a set of dictionary instead of strings.
 So once I correctly handle the new returned type using my solution above.
 
-
+### 11/08
+I notified Laura on the timeout error.
+I raised the issue on the official Ceph issue tracker.
+https://tracker.ceph.com/issues/68883
 
 
 ### Output
