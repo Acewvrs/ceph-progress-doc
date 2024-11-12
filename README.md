@@ -232,6 +232,8 @@ The timeout error has been resolved!
 
 Right now, I'm just waiting for our code to be reviewed.
 
+I demonstrated how our project made an impact by showing the differences in output for the 'mgr module ls -f json-pretty' command.
+
 In the meantime, I'll work on the issue I found on 11/3.
 
 
