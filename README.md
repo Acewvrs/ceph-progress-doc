@@ -227,6 +227,13 @@ I notified Laura on the timeout error.
 I raised the issue on the official Ceph issue tracker.
 https://tracker.ceph.com/issues/68883
 
+### 11/12
+The timeout error has been resolved!
+
+Right now, I'm just waiting for our code to be reviewed.
+
+In the meantime, I'll work on the issue I found on 11/3.
+
 
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
