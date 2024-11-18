@@ -239,7 +239,7 @@ In the meantime, I'll work on the issue I found on 11/3.
 ### 11/15
 I realized someone else was already assigned to the issue I found on Nov. 3.
 
-I'll start working on a new issue: https://tracker.ceph.com/issues/55854
+I'll start working on a new issue [here](https://tracker.ceph.com/issues/68892)
 
 ## Brainstorming:
 
