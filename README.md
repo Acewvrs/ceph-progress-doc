@@ -236,10 +236,28 @@ I demonstrated how our project made an impact by showing the differences in outp
 
 In the meantime, I'll work on the issue I found on 11/3.
 
-### 11/15
+### 11/15-11/17
 I realized someone else was already assigned to the issue I found on Nov. 3.
 
 I'll start working on a new issue [here](https://tracker.ceph.com/issues/68892)
+
+## Brainstorming
+The error is caused here:
+```
+    if (!force && !pending_map.can_run_module(module, &can_run_error)) {
+      ss << "module '" << module << "' reports that it cannot run on the active "
+            "manager daemon: " << can_run_error << " (pass --force to force "
+            "enablement)";
+      r = -ENOENT;
+      goto out;
+    }
+```
+can_run_module is defined [here](https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mon/MgrMap.h#L355).
+
+* Based on the implementation. The "influx" module's "can_run" attribute is set to false, and this is causing the can_run_module function to return false.
+* Look at where the module is created first and set the can_run to true.
+* But can_run is set to true [by default](https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mon/MgrMap.h#L130), which means this variable was later set to false for this module... why?
+* use 'grep -R "can_run = false" src/' in build directory to find exactly where we're setting the variable
 
 ## Brainstorming:
 
