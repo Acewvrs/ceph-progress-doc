@@ -263,6 +263,16 @@ can_run_module is defined [here](https://github.com/Acewvrs/ceph/blob/bfa057d9fc
 * pyModuleRef is defined [here] (https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mgr/PyModule.h#L174)
 * and can_run is set to false in pyModule [here] (https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mgr/PyModule.h#L68)
 
+### 11/19
+* One of the contributors left comments/suggestions/feedback on our PR:
+* Indentation error (easy fix)
+* Block - instead of using a block, use a separate function. (easy fix)
+* You are manipulating pointers into a vector, if I'm not mistaken. I do not know the locking infra for the modules. Are we sure there is no possibility of change to the modules vector by another thread during the execution of this function? (hard)
+
+## Braninstorming
+* There doesn't seem to be any mutex locks for the ModuleInfo class, so I think it is possible for the class to be modified by another thread. I think one way to get around this vulnerability is instead of directly storing the ModuleInfo pointers, we can store only the module names as strings, and grab its info using the get_module_info function when we need them: https://github.com/Acewvrs/ceph/blob/fb2877ccb6f9d58f59e0577ee75d98e196ef595f/src/mon/MgrMap.h#L349
+* map is of type MgrMap, and is set [here] (https://github.com/Acewvrs/ceph/blob/fb2877ccb6f9d58f59e0577ee75d98e196ef595f/src/mon/MgrMonitor.h#L28)
+
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
 <details>  
