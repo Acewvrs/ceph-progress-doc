@@ -258,9 +258,10 @@ can_run_module is defined [here](https://github.com/Acewvrs/ceph/blob/bfa057d9fc
 * Look at where the module is created first and set the can_run to true.
 * But can_run is set to true [by default](https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mon/MgrMap.h#L130), which means this variable was later set to false for this module... why?
 * use 'grep -R "can_run = false" src/' in build directory to find exactly where we're setting the variable
-
-## Brainstorming:
-
+* can_run is set [here] (https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mgr/MgrStandby.cc#L228)
+* get_modules is defined [here] (https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mgr/PyModuleRegistry.h#L82C8-L82C19)
+* pyModuleRef is defined [here] (https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mgr/PyModule.h#L174)
+* and can_run is set to false in pyModule [here] (https://github.com/Acewvrs/ceph/blob/bfa057d9fcd570ed2944817c2172998eb1b75235/src/mgr/PyModule.h#L68)
 
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
