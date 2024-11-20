@@ -279,7 +279,26 @@ I worked on resolving these issues.
 I received more feedback from contributors on our PR:
 * Small commit message fixes
 * Remove container that stores module names and use std::find_if
-* Merge two commits that, when formed together, do nothing
+* Drop two commits that, when formed together, do nothing
+  
+## Notes for dropping commits:
+I can easily drop commits by following these steps:
+1. git checkout my-pull-request-branch
+2. git rebase -i HEAD~n // where n is the number of last commits you want to include in interactive rebase.
+3. Replace pick with drop for commits you want to discard.
+4. Save and exit.
+5. git push songj project3 --force-with-lease
+
+## Brainstorm for removing container
+* available_modules is a vector of ModuleInfo (std::vector<ModuleInfo>)
+* each ModuleInfo has a name variable
+* instead of creating a separate container like [here] (https://github.com/Acewvrs/ceph/blob/f074573b8973b4da7cc7f613b8a079fe37cded00/src/mon/MgrMonitor.cc#L1018C7-L1018C68), we can do something like std::find_if(map.available_modules.begin(), map.available_modules.end(), [](const ModuleInfo & m) -> bool { return m.name == module_name; });
+* save the returned iterator like: auto module_itr = std::find_if(...);
+* then use it like *module_itr;
+* if there's no module that satisfies the condition, it returns map.available_modules.end().
+
+## Question:
+* I was under the impression that the "conflict" section is required for merge conflicts. Should I keep the section, or remove it?
 
 I worked on fixing these issues.
 
