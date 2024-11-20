@@ -275,6 +275,14 @@ I worked on resolving these issues.
 * There doesn't seem to be any mutex locks for the ModuleInfo class, so I think it is possible for the class to be modified by another thread. I think one way to get around this vulnerability is instead of directly storing the ModuleInfo pointers, we can store only the module names as strings, and grab its info using the get_module_info function when we need them: https://github.com/Acewvrs/ceph/blob/fb2877ccb6f9d58f59e0577ee75d98e196ef595f/src/mon/MgrMap.h#L349
 * map is of type MgrMap, and is set [here] (https://github.com/Acewvrs/ceph/blob/fb2877ccb6f9d58f59e0577ee75d98e196ef595f/src/mon/MgrMonitor.h#L28)
 
+### 11/20
+I received more feedback from contributors on our PR:
+* Small commit message fixes
+* Remove container that stores module names and use std::find_if
+* Merge two commits that, when formed together, do nothing
+
+I worked on fixing these issues.
+
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
 <details>  
