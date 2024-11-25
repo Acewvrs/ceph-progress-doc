@@ -302,6 +302,11 @@ I can easily drop commits by following these steps:
 
 I worked on fixing these issues.
 
+### 11/22
+I worked on the poster for our presentation day (12/3) 
+
+The poster slide is [here](https://docs.google.com/presentation/d/1UjsYCNjg86qSgsUsJZQYNDXcKvA6p98O7o98L6UmOvk/edit?usp=sharing)
+
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
 <details>  
