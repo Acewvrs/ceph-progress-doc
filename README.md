@@ -307,6 +307,9 @@ I worked on the poster for our presentation day (12/3)
 
 The poster slide is [here](https://docs.google.com/presentation/d/1UjsYCNjg86qSgsUsJZQYNDXcKvA6p98O7o98L6UmOvk/edit?usp=sharing)
 
+### 11/26
+I continued to work on the poster.
+
 ### Output
 Full output of the command 'ceph mgr module ls ls -f json-pretty':
 <details>  
